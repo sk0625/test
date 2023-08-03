@@ -15,6 +15,7 @@
     }
 
     .container {
+      width: 90%;
       max-width: 500px;
       padding: 20px;
       border-radius: 10px;
@@ -31,8 +32,8 @@
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 16px 28px;
+      font-size: 20px;
       background-color: #70C3E7;
       color: #fff;
       border: 2px solid #70C3E7;
@@ -83,6 +84,22 @@
       height: 100%;
       z-index: -1;
       background: linear-gradient(135deg, #70C3E7, #65C7A4);
+    }
+
+    @media screen and (max-width: 500px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+      
+      button {
+        padding: 14px 26px;
+        font-size: 18px;
+      }
+      
+      .result {
+        margin-top: 16px;
+      }
     }
   </style>
 </head>
