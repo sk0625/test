@@ -53,6 +53,9 @@
       /*border: 1px solid #ddd; */
       text-align: center;
     }
+    tr{
+      border-bottom: 1px solid darkcyan;
+    }
 
     .red-number {
       color: red;
