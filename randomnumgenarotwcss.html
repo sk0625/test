@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sunex testing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #70C3E7, #65C7A4);
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 16px 28px;
+      font-size: 20px;
+      background-color: #70C3E7;
+      color: #fff;
+      border: 2px solid #70C3E7;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 10px;
+      text-align: center;
+      text-align: -webkit-center;
+    }
+
+    /* Table styles */
+    table {
+      /* width: 100%; */
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px;
+      /*border: 1px solid #ddd; */
+      text-align: center;
+    }
+
+    .red-number {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="color: #fff;">Another Version</h1>
+    <label for="numPlays" style="color: #fff;">Number of Plays:</label>
+    <input type="number" id="numPlays" min="1" value="1">
+    <button onclick="generateNumbers()">Click ME! to Generate Numbers</button>
+    <div class="result" id="resultSection">
+      <!-- Results will be added here -->
+    </div>
+  </div>
+
+  <script>
+    let generatedNumbers = [];
+
+    function generateNumbers() {
+      const numPlays = parseInt(document.getElementById('numPlays').value);
+
+      if (isNaN(numPlays) || numPlays <= 0) {
+        alert('Please enter a valid number of plays.');
+        return;
+      }
+
+      const resultSection = document.getElementById('resultSection');
+      resultSection.innerHTML = ''; // Clear previous results
+
+      const table = document.createElement('table');
+      table.classList.add('result-table');
+
+      for (let play = 1; play <= numPlays; play++) {
+        const randomNumbers = generateRandomNumbers();
+        generatedNumbers.push(randomNumbers);
+        displayNumbers(table, randomNumbers);
+      }
+
+      resultSection.appendChild(table);
+    }
+
+    function generateRandomNumbers() {
+      const randomNumbers = [];
+      const randomNumber25 = Math.floor(Math.random() * 25) + 1;
+
+      for (let i = 0; i < 5; i++) {
+        let num;
+        do {
+          num = Math.floor(Math.random() * 69) + 1;
+        } while (randomNumbers.includes(num));
+        randomNumbers.push(num);
+      }
+      randomNumbers.sort((a, b) => a - b);
+
+      return { numbers: randomNumbers, number25: randomNumber25 };
+    }
+
+    function displayNumbers(table, randomNumbersData) {
+      const numberRow = document.createElement('tr');
+
+      // Display the random numbers within the set
+      randomNumbersData.numbers.forEach(number => {
+        const numberCell = document.createElement('td');
+        numberCell.textContent = number;
+        numberRow.appendChild(numberCell);
+      });
+
+      // Add a gap cell
+      const gapCell = document.createElement('td');
+      numberRow.appendChild(gapCell);
+
+      // Display the red number (1 to 25) within the set
+      const redNumberCell = document.createElement('td');
+      redNumberCell.classList.add('red-number');
+      redNumberCell.textContent = randomNumbersData.number25;
+      numberRow.appendChild(redNumberCell);
+
+      // Add the number row to the table
+      table.appendChild(numberRow);
+    }
+  </script>
+</body>
+</html>
